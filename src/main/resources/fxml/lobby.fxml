@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /resources/lobby.fxml -->
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+
+<?import java.lang.String?>
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="scrabble.client.controller.LobbyController"
+            styleClass="root-pane">
+
+    <top>
+        <VBox spacing="10" styleClass="header-box">
+            <padding>
+                <Insets top="20" right="20" bottom="10" left="20"/>
+            </padding>
+            <Label text="WORD-POT" styleClass="title-label">
+                <font>
+                    <Font name="Arial" size="24"/>
+                </font>
+            </Label>
+
+            <HBox spacing="20" alignment="CENTER_LEFT">
+                <TextField fx:id="playerNameField" promptText="Your name"
+                           styleClass="name-field" prefWidth="200"/>
+                <TextField fx:id="serverAddressField" text="localhost"
+                           promptText="Server's address" prefWidth="150"/>
+                <TextField fx:id="serverPortField" text="5555"
+                           promptText="Port" prefWidth="80"/>
+                <Button fx:id="connectButton" text="Connect"
+                        styleClass="connect-button" onAction="#handleConnect"/>
+                <Button fx:id="disconnectButton" text="Disconnect"
+                        onAction="#handleDisconnect" disable="true"/>
+                <Label fx:id="statusLabel" text="Not connected"
+                       styleClass="status-label"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <SplitPane dividerPositions="0.3" orientation="HORIZONTAL">
+            <VBox spacing="15" styleClass="room-creation-pane">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+
+                <Label text="Create room" styleClass="section-label">
+                    <font>
+                        <Font name="Arial" size="16"/>
+                    </font>
+                </Label>
+
+                <TextField fx:id="newRoomNameField" promptText="Room's name" prefWidth="200"/>
+                <ComboBox fx:id="maxPlayersCombo" promptText="Number of players" prefWidth="200">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="2"/>
+                            <String fx:value="3"/>
+                            <String fx:value="4"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                <Button fx:id="createRoomButton" text="Create room"
+                        onAction="#handleCreateRoom" disable="true" prefWidth="200"/>
+
+                <Separator/>
+
+                <Label text="Available rooms" styleClass="section-label">
+                    <font>
+                        <Font name="Arial" size="16"/>
+                    </font>
+                </Label>
+
+                <ListView fx:id="roomsListView" styleClass="rooms-list" prefHeight="200"/>
+                <Button fx:id="joinRoomButton" text="Enter room"
+                        onAction="#handleJoinRoom" disable="true" prefWidth="200"/>
+            </VBox>
+
+            <VBox spacing="15" styleClass="room-info-pane">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+
+                <Label fx:id="currentRoomLabel" text="Not in a room"
+                       styleClass="current-room-label">
+                    <font>
+                        <Font name="Arial" size="18"/>
+                    </font>
+                </Label>
+
+                <ListView fx:id="playersListView" styleClass="players-list" prefHeight="150"/>
+
+                <HBox spacing="10">
+                    <Button fx:id="readyButton" text="Ready"
+                            onAction="#handleReady" disable="true" prefWidth="100"/>
+                    <Button fx:id="leaveRoomButton" text="Leave room"
+                            onAction="#handleLeaveRoom" disable="true" prefWidth="150"/>
+                    <Button fx:id="startGameButton" text="Start game"
+                            onAction="#handleStartGame" disable="true" prefWidth="150"/>
+                </HBox>
+
+                <Separator/>
+
+                <Label text="Room's chat" styleClass="section-label">
+                    <font>
+                        <Font name="Arial" size="16"/>
+                    </font>
+                </Label>
+
+                <TextArea fx:id="chatArea" editable="false"
+                          styleClass="chat-area" VBox.vgrow="ALWAYS" prefHeight="200"/>
+
+                <HBox spacing="10">
+                    <TextField fx:id="chatInputField" promptText="Message..."
+                               HBox.hgrow="ALWAYS" onAction="#handleSendChat"/>
+                    <Button fx:id="sendChatButton" text="Send"
+                            onAction="#handleSendChat"/>
+                </HBox>
+            </VBox>
+        </SplitPane>
+    </center>
+
+</BorderPane>
