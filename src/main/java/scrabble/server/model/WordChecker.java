@@ -9,7 +9,6 @@ import java.util.*;
 public class WordChecker {
     private final ServerModel serverModel;
 
-    
     private static final String[][] CELL_TYPES = new String[15][15];
 
     static {
@@ -498,18 +497,28 @@ public class WordChecker {
      */
     public void updateBoard(GameState.BoardCell[][] board, String word, int row, int col,
                             boolean horizontal, List<scrabble.utils.TileBag.Tile> tiles) {
+        if (board == null || word == null || tiles == null) {
+            return;
+        }
+
+        List<scrabble.utils.TileBag.Tile> usedTiles = new ArrayList<>(tiles);
+
         for (int i = 0; i < word.length(); i++) {
             int r = horizontal ? row : row + i;
             int c = horizontal ? col + i : col;
 
-            if (!board[r][c].hasTile()) {
-                char neededLetter = Character.toUpperCase(word.charAt(i));
+            if (r >= 0 && r < 15 && c >= 0 && c < 15) {
+                if (!board[r][c].hasTile()) {
+                    char neededLetter = Character.toUpperCase(word.charAt(i));
 
-                
-                for (scrabble.utils.TileBag.Tile tile : tiles) {
-                    if (Character.toUpperCase(tile.getLetter()) == neededLetter) {
-                        board[r][c].setTile(tile);
-                        break;
+                    
+                    for (int j = 0; j < usedTiles.size(); j++) {
+                        scrabble.utils.TileBag.Tile tile = usedTiles.get(j);
+                        if (Character.toUpperCase(tile.getLetter()) == neededLetter) {
+                            board[r][c].setTile(tile);
+                            usedTiles.remove(j);
+                            break;
+                        }
                     }
                 }
             }
@@ -520,9 +529,6 @@ public class WordChecker {
      * Проверяет конец игры
      */
     public boolean isGameOver(GameState.BoardCell[][] board, scrabble.utils.TileBag tileBag) {
-        
-        
-        
         return tileBag.remainingTiles() == 0;
     }
 
