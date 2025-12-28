@@ -1,7 +1,9 @@
 package scrabble.client.controller;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.control.*;
@@ -107,9 +109,9 @@ public class GameController {
 
         scoreTable.setItems(scoreData);
         playerColumn.setCellValueFactory(cell ->
-                new javafx.beans.property.SimpleStringProperty(cell.getValue().getPlayerName()));
+                new SimpleStringProperty(cell.getValue().getPlayerName()));
         scoreColumn.setCellValueFactory(cell ->
-                new javafx.beans.property.SimpleIntegerProperty(cell.getValue().getScore()).asObject());
+                new SimpleIntegerProperty(cell.getValue().getScore()).asObject());
 
 
         rackView.setOnTileDropped(this::handleTileDrop);
