@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrabble.server.controller.ServerController">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <Label text="Server of Word-Pot" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Port:"/>
+        <TextField fx:id="portField" promptText="Port" prefWidth="100"/>
+        <Button fx:id="startButton" text="Start server" onAction="#handleStartServer"/>
+        <Button fx:id="stopButton" text="Stop server" disable="true" onAction="#handleStopServer"/>
+    </HBox>
+
+    <Label text="Server's log:"/>
+    <ListView fx:id="logArea" prefHeight="400"/>
+</VBox>
