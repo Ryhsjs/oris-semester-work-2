@@ -17,7 +17,6 @@ public class Main extends Application {
         controller.setPrimaryStage(primaryStage);
 
         Scene scene = new Scene(root, 900, 700);
-        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
         primaryStage.setTitle("Word-Pot");
         primaryStage.setScene(scene);

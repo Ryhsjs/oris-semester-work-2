@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- /resources/lobby.fxml -->
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.collections.FXCollections?>
-
 <?import java.lang.String?>
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="scrabble.client.controller.LobbyController"
-            styleClass="root-pane">
+            styleClass="root-pane"
+            stylesheets="@../styles.css">
 
     <top>
         <VBox spacing="10" styleClass="header-box">

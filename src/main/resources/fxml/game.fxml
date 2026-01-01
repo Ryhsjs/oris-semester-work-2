@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- /resources/game.fxml -->
+
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
 <?import scrabble.client.view.components.BoardCanvas?>
 <?import scrabble.client.view.components.RackView?>
-
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="scrabble.client.controller.GameController"
-            styleClass="game-root">
+            styleClass="game-root"
+            stylesheets="@../styles.css">
 
     <top>
         <HBox spacing="20" styleClass="game-header" alignment="CENTER_LEFT">
@@ -78,7 +78,7 @@
 
                 <Label text="Scores table" styleClass="panel-title">
                     <font>
-                        <Font name="Arial" size="16" />
+                        <Font name="Arial" size="16"/>
                     </font>
                 </Label>
 
