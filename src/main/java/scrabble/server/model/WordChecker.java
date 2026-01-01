@@ -1,8 +1,9 @@
 package scrabble.server.model;
 
+import scrabble.client.model.BoardCell;
 import scrabble.client.model.GameState;
 import scrabble.utils.DictionaryLoader;
-import scrabble.utils.Tile;
+import scrabble.client.model.Tile;
 import scrabble.utils.TileBag;
 
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class WordChecker {
     }
 
     public ValidationResult validateMove(String word, int row, int col, boolean horizontal,
-                                         GameState.BoardCell[][] board, List<String> tileIds,
+                                         BoardCell[][] board, List<String> tileIds,
                                          String playerId, GameRoom room) {
         ValidationResult result = new ValidationResult();
 
@@ -182,14 +183,14 @@ public class WordChecker {
     }
 
     private boolean canPlaceWord(String word, int row, int col, boolean horizontal,
-                                 GameState.BoardCell[][] board) {
+                                 BoardCell[][] board) {
         boolean touchesExisting = false;
 
         for (int i = 0; i < word.length(); i++) {
             int r = horizontal ? row : row + i;
             int c = horizontal ? col + i : col;
 
-            GameState.BoardCell cell = board[r][c];
+            BoardCell cell = board[r][c];
 
             
             if (cell.hasTile() && Character.toUpperCase(cell.getTile().getLetter()) != word.charAt(i)) {
@@ -209,7 +210,7 @@ public class WordChecker {
         return isFirstMove(board) || touchesExisting;
     }
 
-    private boolean hasAdjacentTile(int row, int col, GameState.BoardCell[][] board) {
+    private boolean hasAdjacentTile(int row, int col, BoardCell[][] board) {
         
         int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
@@ -227,7 +228,7 @@ public class WordChecker {
         return false;
     }
 
-    private boolean isFirstMove(GameState.BoardCell[][] board) {
+    private boolean isFirstMove(BoardCell[][] board) {
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 15; j++) {
                 if (board[i][j].hasTile()) {
@@ -264,7 +265,7 @@ public class WordChecker {
     }
 
     private List<WordInfo> findAllNewWords(String mainWord, int row, int col, boolean horizontal,
-                                           GameState.BoardCell[][] board) {
+                                           BoardCell[][] board) {
         List<WordInfo> allWords = new ArrayList<>();
 
         
@@ -288,7 +289,7 @@ public class WordChecker {
     }
 
     private WordInfo findPerpendicularWord(int row, int col, boolean horizontal,
-                                           GameState.BoardCell[][] board, char newLetter) {
+                                           BoardCell[][] board, char newLetter) {
         StringBuilder word = new StringBuilder();
         int startRow = row;
         int startCol = col;
@@ -297,7 +298,7 @@ public class WordChecker {
         int r = row, c = col;
         if (horizontal) {
             while (c >= 0) {
-                GameState.BoardCell cell = board[r][c];
+                BoardCell cell = board[r][c];
                 if (c == col) {
                     word.insert(0, newLetter);
                 } else if (cell.hasTile()) {
@@ -311,7 +312,7 @@ public class WordChecker {
             if (c < 0) startCol = 0;
         } else {
             while (r >= 0) {
-                GameState.BoardCell cell = board[r][c];
+                BoardCell cell = board[r][c];
                 if (r == row) {
                     word.insert(0, newLetter);
                 } else if (cell.hasTile()) {
@@ -330,7 +331,7 @@ public class WordChecker {
         c = horizontal ? col + 1 : col;
         if (horizontal) {
             while (c < 15) {
-                GameState.BoardCell cell = board[r][c];
+                BoardCell cell = board[r][c];
                 if (cell.hasTile()) {
                     word.append(Character.toUpperCase(cell.getTile().getLetter()));
                 } else {
@@ -340,7 +341,7 @@ public class WordChecker {
             }
         } else {
             while (r < 15) {
-                GameState.BoardCell cell = board[r][c];
+                BoardCell cell = board[r][c];
                 if (cell.hasTile()) {
                     word.append(Character.toUpperCase(cell.getTile().getLetter()));
                 } else {
@@ -358,7 +359,7 @@ public class WordChecker {
         return null;
     }
 
-    private int calculateTotalScore(List<WordInfo> allWords, GameState.BoardCell[][] board,
+    private int calculateTotalScore(List<WordInfo> allWords, BoardCell[][] board,
                                     String mainWord, int mainRow, int mainCol, boolean mainHorizontal) {
         int totalScore = 0;
 
@@ -369,7 +370,7 @@ public class WordChecker {
         return totalScore;
     }
 
-    private int calculateWordScore(WordInfo wordInfo, GameState.BoardCell[][] board) {
+    private int calculateWordScore(WordInfo wordInfo, BoardCell[][] board) {
         int wordScore = 0;
         int wordMultiplier = 1;
         boolean hasBlankTile = false;
@@ -381,7 +382,7 @@ public class WordChecker {
             char letter = wordInfo.word.charAt(i);
             int letterScore = TileBag.getLetterValue(letter);
 
-            GameState.BoardCell cell = board[r][c];
+            BoardCell cell = board[r][c];
             String cellType = CELL_TYPES[r][c];
 
             
@@ -456,7 +457,7 @@ public class WordChecker {
     /**
      * Проверяет, можно ли сделать ход в данной позиции
      */
-    public boolean canMakeMove(GameState.BoardCell[][] board, String playerId, GameRoom room) {
+    public boolean canMakeMove(BoardCell[][] board, String playerId, GameRoom room) {
         
         
         return true;
@@ -497,7 +498,7 @@ public class WordChecker {
     /**
      * Обновляет доску после успешного хода
      */
-    public void updateBoard(GameState.BoardCell[][] board, String word, int row, int col,
+    public void updateBoard(BoardCell[][] board, String word, int row, int col,
                             boolean horizontal, List<Tile> tiles) {
         if (board == null || word == null || tiles == null) {
             return;

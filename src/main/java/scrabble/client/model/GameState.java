@@ -3,33 +3,12 @@ package scrabble.client.model;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import scrabble.utils.Tile;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class GameState {
-    public static class BoardCell {
-        private Tile tile;
-        private String multiplier; // "DW", "TW", "DL", "TL", null
-        private int row;
-        private int col;
-
-        public BoardCell(int row, int col, String multiplier) {
-            this.row = row;
-            this.col = col;
-            this.multiplier = multiplier;
-        }
-
-        public Tile getTile() { return tile; }
-        public void setTile(Tile tile) { this.tile = tile; }
-        public boolean hasTile() { return tile != null; }
-        public String getMultiplier() { return multiplier; }
-        public int getRow() { return row; }
-        public int getCol() { return col; }
-    }
-
     private BoardCell[][] board;
     private ObservableList<Player> players = FXCollections.observableArrayList();
     private ObjectProperty<Player> currentPlayer = new SimpleObjectProperty<>();

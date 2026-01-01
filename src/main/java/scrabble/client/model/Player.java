@@ -1,7 +1,5 @@
 package scrabble.client.model;
 
-import scrabble.utils.Tile;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +10,8 @@ public class Player {
     private List<Tile> rack;
     private boolean ready;
     private boolean isCurrentTurn;
+
+    public Player() {}
 
     public Player(String id, String name) {
         this.id = id;

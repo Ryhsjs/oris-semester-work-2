@@ -20,7 +20,7 @@ import scrabble.client.view.components.RackView;
 import scrabble.client.view.components.TileView;
 import scrabble.protocol.Message;
 import scrabble.protocol.ProtocolParser;
-import scrabble.utils.Tile;
+import scrabble.client.model.Tile;
 
 import java.util.*;
 

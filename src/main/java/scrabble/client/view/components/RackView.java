@@ -3,7 +3,7 @@ package scrabble.client.view.components;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import scrabble.utils.Tile;
+import scrabble.client.model.Tile;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,5 +1,7 @@
 package scrabble.utils;
 
+import scrabble.client.model.Tile;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

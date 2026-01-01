@@ -7,7 +7,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import scrabble.client.model.GameState;
 import scrabble.client.view.components.TileView.TileDropEvent;
-import scrabble.utils.Tile;
+import scrabble.client.model.Tile;
 
 public class BoardCanvas extends Canvas {
     private static final int CELL_SIZE = 40;

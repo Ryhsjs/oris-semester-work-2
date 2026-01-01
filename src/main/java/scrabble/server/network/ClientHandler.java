@@ -1,12 +1,13 @@
 package scrabble.server.network;
 
+import scrabble.client.model.BoardCell;
 import scrabble.client.model.GameState;
 import scrabble.protocol.Message;
 import scrabble.protocol.ProtocolParser;
 import scrabble.server.model.GameRoom;
 import scrabble.server.model.ServerModel;
 import scrabble.server.model.WordChecker;
-import scrabble.utils.Tile;
+import scrabble.client.model.Tile;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -197,7 +198,7 @@ public class ClientHandler {
         }
     }
 
-    private GameState.BoardCell[][] getCurrentBoardState(GameRoom room) {
+    private BoardCell[][] getCurrentBoardState(GameRoom room) {
 
         GameState gameState = new GameState();
         return gameState.getBoard();

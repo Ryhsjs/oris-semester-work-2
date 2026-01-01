@@ -6,7 +6,7 @@ import scrabble.client.model.GameState;
 import scrabble.client.model.Player;
 import scrabble.protocol.Message;
 import scrabble.protocol.ProtocolParser;
-import scrabble.utils.Tile;
+import scrabble.client.model.Tile;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

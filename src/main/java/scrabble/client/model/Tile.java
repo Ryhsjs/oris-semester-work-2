@@ -1,11 +1,13 @@
-package scrabble.utils;
+package scrabble.client.model;
 
 import java.util.Random;
 
 public class Tile {
-        private final String id;
-        private final char letter;
-        private final int points;
+        private String id;
+        private char letter;
+        private int points;
+
+        public Tile() {}
 
         public Tile(char letter, int points) {
             this.letter = letter;
