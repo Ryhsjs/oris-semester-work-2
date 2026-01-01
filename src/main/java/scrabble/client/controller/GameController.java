@@ -20,7 +20,7 @@ import scrabble.client.view.components.RackView;
 import scrabble.client.view.components.TileView;
 import scrabble.protocol.Message;
 import scrabble.protocol.ProtocolParser;
-import scrabble.utils.TileBag;
+import scrabble.utils.Tile;
 
 import java.util.*;
 
@@ -301,7 +301,7 @@ public class GameController {
                 .orElse(null);
 
         if (currentPlayer != null) {
-            for (TileBag.Tile tile : currentPlayer.getRack()) {
+            for (Tile tile : currentPlayer.getRack()) {
                 rackView.addTile(tile);
             }
         }
@@ -397,7 +397,7 @@ public class GameController {
         });
 
         for (Map.Entry<String, int[]> entry : sortedTiles) {
-            TileBag.Tile tile = getTileById(entry.getKey());
+            Tile tile = getTileById(entry.getKey());
             if (tile != null) {
                 wordBuilder.append(tile.getLetter());
                 tileIds.add(tile.getId());
@@ -604,7 +604,7 @@ public class GameController {
             return;
         }
 
-        TileBag.Tile tile = event.getTile();
+        Tile tile = event.getTile();
 
 
         Point2D sceneCoords = new Point2D(event.getSceneX(), event.getSceneY());
@@ -719,7 +719,7 @@ public class GameController {
         }
     }
 
-    private TileBag.Tile getTileById(String tileId) {
+    private Tile getTileById(String tileId) {
         Player currentPlayer = model.getGameState().getPlayers().stream()
                 .filter(p -> p.getId().equals(model.getPlayerId()))
                 .findFirst()
@@ -798,7 +798,7 @@ public class GameController {
                 for (Map.Entry<String, int[]> entry : placedTiles.entrySet()) {
                     String tileId = entry.getKey();
                     int[] pos = entry.getValue();
-                    TileBag.Tile tile = getTileById(tileId);
+                    Tile tile = getTileById(tileId);
                     if (tile != null) {
                         // Remove tile from GameState board
                         model.getGameState().placeTile(pos[0], pos[1], null);
@@ -820,7 +820,7 @@ public class GameController {
             return;
         }
 
-        TileBag.Tile clickedTile = event.getTile();
+        Tile clickedTile = event.getTile();
         int row = event.getRow();
         int col = event.getCol();
 
@@ -841,7 +841,6 @@ public class GameController {
     }
 
     private void clearBoardAfterMove() {
-        // Remove all placed tiles from the board
         for (Map.Entry<String, int[]> entry : placedTiles.entrySet()) {
             int[] pos = entry.getValue();
             model.getGameState().placeTile(pos[0], pos[1], null);

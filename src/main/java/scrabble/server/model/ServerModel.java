@@ -1,10 +1,10 @@
 package scrabble.server.model;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-
 import scrabble.server.network.ClientHandler;
 import scrabble.utils.DictionaryLoader;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ServerModel {
     private final Map<String, GameRoom> rooms;

@@ -7,20 +7,20 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import scrabble.utils.TileBag;
+import scrabble.utils.Tile;
 
 public class TileView extends StackPane {
     public static final double SIZE = 35;
     private static final double FONT_SIZE = 20;
 
-    private TileBag.Tile tile;
+    private Tile tile;
     private Rectangle background;
     private Text letterText;
     private Text pointsText;
     private boolean isDragging;
     private double dragStartX, dragStartY;
 
-    public TileView(TileBag.Tile tile) {
+    public TileView(Tile tile) {
         this.tile = tile;
         this.isDragging = false;
 
@@ -88,7 +88,7 @@ public class TileView extends StackPane {
         });
     }
 
-    public TileBag.Tile getTile() {
+    public Tile getTile() {
         return tile;
     }
 
@@ -107,19 +107,19 @@ public class TileView extends StackPane {
         public static final EventType<TileDropEvent> TILE_DROPPED =
                 new EventType<>(javafx.event.Event.ANY, "TILE_DROPPED");
 
-        private final TileBag.Tile tile;
+        private final Tile tile;
         private final double sceneX;
         private final double sceneY;
 
         public TileDropEvent(EventType<? extends javafx.event.Event> eventType,
-                             TileBag.Tile tile, double sceneX, double sceneY) {
+                             Tile tile, double sceneX, double sceneY) {
             super(eventType);
             this.tile = tile;
             this.sceneX = sceneX;
             this.sceneY = sceneY;
         }
 
-        public TileBag.Tile getTile() {
+        public Tile getTile() {
             return tile;
         }
 

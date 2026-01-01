@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import scrabble.client.model.ClientModel;
+import scrabble.client.model.Player;
 import scrabble.client.network.ClientNetworkHandler;
 import scrabble.protocol.Message;
 import scrabble.protocol.ProtocolParser;
@@ -205,7 +206,7 @@ public class LobbyController {
             currentRoomLabel.setText("Room: " + roomId);
 
             playersListView.getItems().clear();
-            for (scrabble.client.model.Player player : model.getGameState().getPlayers()) {
+            for (Player player : model.getGameState().getPlayers()) {
                 String playerStatus = player.getName();
                 if (player.isReady()) playerStatus += " ✓";
                 if (player.isCurrentTurn()) playerStatus += " *";

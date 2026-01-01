@@ -7,14 +7,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import scrabble.client.model.GameState;
 import scrabble.client.view.components.TileView.TileDropEvent;
-import scrabble.utils.TileBag;
+import scrabble.utils.Tile;
 
 public class BoardCanvas extends Canvas {
     private static final int CELL_SIZE = 40;
     private static final int BOARD_SIZE = 15;
 
     private GameState gameState;
-    private TileBag.Tile draggedTile;
+    private Tile draggedTile;
     private int dragCellRow = -1;
     private int dragCellCol = -1;
 
@@ -131,7 +131,7 @@ public class BoardCanvas extends Canvas {
         return null;
     }
 
-    private void drawTileAt(GraphicsContext gc, int row, int col, TileBag.Tile tile, boolean isDragged) {
+    private void drawTileAt(GraphicsContext gc, int row, int col, Tile tile, boolean isDragged) {
         double x = col * CELL_SIZE;
         double y = row * CELL_SIZE;
 
@@ -217,7 +217,7 @@ public class BoardCanvas extends Canvas {
 
             if (row >= 0 && row < BOARD_SIZE && col >= 0 && col < BOARD_SIZE) {
                 if (gameState != null && gameState.getCell(row, col).hasTile()) {
-                    TileBag.Tile clickedTile = gameState.getCell(row, col).getTile();
+                    Tile clickedTile = gameState.getCell(row, col).getTile();
                     TileClickedEvent clickEvent = new TileClickedEvent(
                             TileClickedEvent.TILE_CLICKED,
                             clickedTile,
@@ -231,7 +231,7 @@ public class BoardCanvas extends Canvas {
         });
     }
 
-    public void setDraggedTile(TileBag.Tile tile) {
+    public void setDraggedTile(Tile tile) {
         this.draggedTile = tile;
         this.dragCellRow = -1;
         this.dragCellCol = -1;
@@ -254,19 +254,19 @@ public class BoardCanvas extends Canvas {
         public static final javafx.event.EventType<TileClickedEvent> TILE_CLICKED =
                 new javafx.event.EventType<>(javafx.event.Event.ANY, "TILE_CLICKED");
 
-        private final TileBag.Tile tile;
+        private final Tile tile;
         private final int row;
         private final int col;
 
         public TileClickedEvent(javafx.event.EventType<? extends javafx.event.Event> eventType,
-                                TileBag.Tile tile, int row, int col) {
+                                Tile tile, int row, int col) {
             super(eventType);
             this.tile = tile;
             this.row = row;
             this.col = col;
         }
 
-        public TileBag.Tile getTile() {
+        public Tile getTile() {
             return tile;
         }
 

@@ -1,13 +1,13 @@
 package scrabble.client.model;
 
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import scrabble.utils.TileBag.Tile;
+import scrabble.utils.Tile;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GameState {
     public static class BoardCell {

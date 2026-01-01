@@ -1,21 +1,24 @@
 package scrabble.client.network;
 
-import scrabble.protocol.Message;
+import javafx.application.Platform;
 import scrabble.client.model.ClientModel;
 import scrabble.client.model.GameState;
 import scrabble.client.model.Player;
-import javafx.application.Platform;
+import scrabble.protocol.Message;
+import scrabble.protocol.ProtocolParser;
+import scrabble.utils.Tile;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import scrabble.protocol.ProtocolParser;
 
 public class ClientNetworkHandler {
     private SocketChannel socketChannel;
@@ -440,7 +443,7 @@ public class ClientNetworkHandler {
 
         for (Player player : gameState.getPlayers()) {
             for (int i = 0; i < 7; i++) {
-                scrabble.utils.TileBag.Tile tile = model.getTileBag().drawTile();
+                Tile tile = model.getTileBag().drawTile();
                 if (tile != null) {
                     player.addToRack(tile);
                 }

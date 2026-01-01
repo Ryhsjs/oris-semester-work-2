@@ -1,8 +1,9 @@
 package scrabble.client.model;
 
+import scrabble.utils.Tile;
+
 import java.util.ArrayList;
 import java.util.List;
-import scrabble.utils.TileBag.Tile;
 
 public class Player {
     private String id;

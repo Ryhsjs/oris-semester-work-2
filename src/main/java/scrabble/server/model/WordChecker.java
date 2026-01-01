@@ -2,9 +2,11 @@ package scrabble.server.model;
 
 import scrabble.client.model.GameState;
 import scrabble.utils.DictionaryLoader;
+import scrabble.utils.Tile;
 import scrabble.utils.TileBag;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WordChecker {
     private final ServerModel serverModel;
@@ -496,12 +498,12 @@ public class WordChecker {
      * Обновляет доску после успешного хода
      */
     public void updateBoard(GameState.BoardCell[][] board, String word, int row, int col,
-                            boolean horizontal, List<scrabble.utils.TileBag.Tile> tiles) {
+                            boolean horizontal, List<Tile> tiles) {
         if (board == null || word == null || tiles == null) {
             return;
         }
 
-        List<scrabble.utils.TileBag.Tile> usedTiles = new ArrayList<>(tiles);
+        List<Tile> usedTiles = new ArrayList<>(tiles);
 
         for (int i = 0; i < word.length(); i++) {
             int r = horizontal ? row : row + i;
@@ -513,7 +515,7 @@ public class WordChecker {
 
                     
                     for (int j = 0; j < usedTiles.size(); j++) {
-                        scrabble.utils.TileBag.Tile tile = usedTiles.get(j);
+                        Tile tile = usedTiles.get(j);
                         if (Character.toUpperCase(tile.getLetter()) == neededLetter) {
                             board[r][c].setTile(tile);
                             usedTiles.remove(j);
@@ -526,18 +528,11 @@ public class WordChecker {
     }
 
     /**
-     * Проверяет конец игры
-     */
-    public boolean isGameOver(GameState.BoardCell[][] board, scrabble.utils.TileBag tileBag) {
-        return tileBag.remainingTiles() == 0;
-    }
-
-    /**
      * Рассчитывает финальные очки с учетом оставшихся фишек
      */
-    public int calculateFinalScore(int currentScore, List<scrabble.utils.TileBag.Tile> remainingTiles) {
+    public int calculateFinalScore(int currentScore, List<Tile> remainingTiles) {
         int penalty = 0;
-        for (scrabble.utils.TileBag.Tile tile : remainingTiles) {
+        for (Tile tile : remainingTiles) {
             penalty += TileBag.getLetterValue(tile.getLetter());
         }
 

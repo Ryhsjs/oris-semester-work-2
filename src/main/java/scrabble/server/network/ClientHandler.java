@@ -6,7 +6,7 @@ import scrabble.protocol.ProtocolParser;
 import scrabble.server.model.GameRoom;
 import scrabble.server.model.ServerModel;
 import scrabble.server.model.WordChecker;
-import scrabble.utils.TileBag;
+import scrabble.utils.Tile;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -203,11 +203,11 @@ public class ClientHandler {
         return gameState.getBoard();
     }
 
-    private List<TileBag.Tile> getPlayerTiles(List<String> tileIds) {
+    private List<Tile> getPlayerTiles(List<String> tileIds) {
 
-        List<scrabble.utils.TileBag.Tile> tiles = new ArrayList<>();
+        List<Tile> tiles = new ArrayList<>();
         for (String id : tileIds) {
-            tiles.add(new scrabble.utils.TileBag.Tile(id.charAt(0), 1));
+            tiles.add(new Tile(id.charAt(0), 1));
         }
         return tiles;
     }

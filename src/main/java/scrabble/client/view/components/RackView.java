@@ -1,10 +1,9 @@
 package scrabble.client.view.components;
 
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import scrabble.utils.TileBag;
+import scrabble.utils.Tile;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class RackView extends Pane {
         getChildren().add(rackBackground);
     }
 
-    public void addTile(TileBag.Tile tile) {
+    public void addTile(Tile tile) {
         TileView tileView = new TileView(tile);
         tileViews.add(tileView);
         updateTilePositions();
@@ -64,8 +63,8 @@ public class RackView extends Pane {
         tileViews.clear();
     }
 
-    public List<TileBag.Tile> getTiles() {
-        List<TileBag.Tile> tiles = new ArrayList<>();
+    public List<Tile> getTiles() {
+        List<Tile> tiles = new ArrayList<>();
         for (TileView tileView : tileViews) {
             tiles.add(tileView.getTile());
         }
